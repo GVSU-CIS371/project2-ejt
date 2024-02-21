@@ -12,19 +12,25 @@ function generateProductHTML(product: Product): string {
 function renderProducts(prods: Product[]): void {
     const mainContainer = document.getElementById("main-container");
 
+    if (!mainContainer){
+        console.log("Container not found");
+        return;
+    };
+    mainContainer.innerHTML = "";
+
     for (var prod of prods){
         var str = generateProductHTML(prod);
-        mainContainer?.insertAdjacentHTML('beforeend', str);
+        mainContainer.insertAdjacentHTML('beforeend', str);
     };
 }
 
 function getByCategory(category: string): void {
-    const filtered = products.filter((prod: Product) => prod.category == category);
+    const filtered: Product[] = products.filter((prod: Product) => prod.category == category);
     renderProducts(filtered);
 }
 
 function getByRating(minRating: number): void {
-    const filtered = products.filter((prod: Product) => prod.rating >= minRating);
+    const filtered: Product[] = products.filter((prod: Product) => prod.rating >= minRating);
     renderProducts(filtered);
 }
 
