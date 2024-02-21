@@ -1,4 +1,4 @@
-import { Product, products } from "./data";
+import { Product, products } from "./data.ts";
 
 function generateProductHTML(product: Product): string {
     return `<div class="store-item">
@@ -10,15 +10,22 @@ function generateProductHTML(product: Product): string {
 }
 
 function renderProducts(prods: Product[]): void {
-    // your code
+    const mainContainer = document.getElementById("main-container");
+
+    for (var prod of prods){
+        var str = generateProductHTML(prod);
+        mainContainer?.insertAdjacentHTML('beforeend', str);
+    };
 }
 
 function getByCategory(category: string): void {
-    // your code
+    const filtered = products.filter((prod: Product) => prod.category == category);
+    renderProducts(filtered);
 }
 
 function getByRating(minRating: number): void {
-    // your code
+    const filtered = products.filter((prod: Product) => prod.rating >= minRating);
+    renderProducts(filtered);
 }
 
 export { renderProducts, getByCategory, getByRating };
